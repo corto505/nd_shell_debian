@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  include barre_menu
+ 
+  div.btn-group
+    button(class='btn btn-warning btn-lg btnStat', name='home') court
+      span(class='glyphicon glyphicon-ok-signal')
+    button(class='btn btn-success btn-lg btnStat', name='heure') heure
+    button(class='btn btn-success btn-lg btnStat', name='jour') jour
+    button(class='btn btn-success btn-lg btnStat', name='mois') mois
+    button(class='btn btn-success btn-lg btnStat', name='semaine') semaine
+  span  
+  div.btn-group(class='hidden-xs hidden-sm')
+    button(class='btn btn-info btn-lg btnStat', name='cron') Calendrier
+    a(href='http://192.168.0.70:8888/status.html',class='btn btn-info btn-lg ', target='_blank') Monitoring
+
+    
+  div.stat
+    pre(class='bg-primary white')
+      #{states}
+      div#retour
+  
+  include footer

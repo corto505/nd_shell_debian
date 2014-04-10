@@ -1,0 +1,20 @@
+[
+{
+  "piece"	: "Bureau",
+  "type_module"	: "x10",
+  "cde"	: "echo \"PL M4 off\" | nc localhost 1099",
+  "comment"		: "Eteind lumiere du bureau"
+ },
+ {
+  "piece"	: "Bureau",
+  "type_module"	: "x10",
+  "cde"	: "echo \"PL M12 off\" | nc localhost 1099",
+  "comment"		: "Coupe le chauffage"
+ },
+  {
+  "piece"	: "Sdb",
+  "type_module"	: "x10",
+  "cde"	: "echo \"PL M13 off\" | nc localhost 1099",
+  "comment"		: "Coupe le chauffage"
+ }
+]

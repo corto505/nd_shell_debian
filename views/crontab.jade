@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  include barre_menu
+  
+    .row
+      div(class='col-lg-12 col-md-12')
+        pre(class='bg-primary white')
+          #{states}
+      
+  include footer

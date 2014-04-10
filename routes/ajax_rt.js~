@@ -1,0 +1,9 @@
+var url = require ('url');
+var querystring = require ('querystring');
+
+exports.myajax = function(req,res){
+	var params = querystring.parse(url.parse(req.url).query);
+	console.log('name: '+params['name']);
+	console.log('type: '+params['typebtn']);
+	res.send('<h1> ceci est un test ajax</h1>');
+}

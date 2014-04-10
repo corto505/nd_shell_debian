@@ -1,0 +1,17 @@
+[
+{
+  "piece"	: "cuisine",
+  "type_module"	: "appareil",
+  "code"	: "M12",
+  "nom"		: "radiateur 1",
+  "actif"	: "oui"
+},
+{
+  "piece"	: "cuisine",
+  "type_module"	: "lampe",
+  "code"	: "M10",
+  "nom"		: "palfond",
+  "actif"	: "oui"
+}
+
+]

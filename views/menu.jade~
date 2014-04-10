@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1(class='text-center white') #{title}
+    a#btn2(href='#') test io
+    
+    .row
+        div(class='col-lg-8 col-md-8')
+            ul(class='nav nav-pills nav-stacked')
+                li(class='btn btn-success')
+                   a(href="/piece/1") Salle
+                li(class='btn btn-success')
+                   a(href="/piece/1") Cuisine
+                li(class='btn btn-success')
+                   a(href="/piece/1") Chambre
+                li(class='btn btn-success')
+                   a(href="/piece/1") SDB
+                li(class='btn btn-success')
+                   a(href="/piece/1") Bureau
+             
+ 
+        div#zlog(class='col-lg4 col-md-3 hidden-xs hidden-sm') Droite
+    include footer

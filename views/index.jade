@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p message #{message}
+    div#retour reponse
+    
+  div.stat
+    h3 statistiques
+    pre(class='bg-primary white')
+      #{states}
+      
+      
+  button.shortcut
+    i.icon-rocket
+      Rocket
+      
+  h2 Notificaton from serveur
+  fieldset
+    legende message receive
+    .storage
+    
+  button(value='call serveur', onClick="callserver()") test
+    

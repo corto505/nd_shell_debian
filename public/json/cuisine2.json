@@ -1,0 +1,1 @@
+"{\n\"fruits\" : [\n\t{\n\t  \"wiwi\":3,\n\t  \"mangues\":2,\n\t  \"pommes\":null\n\t\n\t},\n\n\t{ \"paniers\": true},\n ],\n \"legumes\":\n\n  {\n    \"patates\": \"amandine\",\n    \"figues\":  \"de barbarie\",\n    \"poireaux\": false\n\n  }\n\n\n};\n"

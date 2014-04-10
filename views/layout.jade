@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta(name="viewport",content="width=device-width", initial-scale="1")
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/flat-ui.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/javascripts/tzineClock/jquery.tzineClock.css')
+    
+    link(rel='stylesheet', href='/stylesheets/jquery.sidr.dark.css')
+
+    script(src='http://code.jquery.com/jquery-1.10.2.js')
+    script(src='/javascripts/tzineClock/jquery.tzineClock.js')
+    script(src='/javascripts/bootstrap.min.js')
+    
+    script(src='/javascripts/jquery.sidr.min.js')
+    
+    script(src='http://192.168.0.70:3000/socket.io/socket.io.js')
+    script(src='/javascripts/myapp.js')
+  body
+    block content

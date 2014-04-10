@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    h2(class='text-center white') #{title}
+    .row
+        div(class='col-lg-8 col-md-8')
+            ul#liste_droite
+                li
+                    div(class='thumbmail col-md-4 fd_antracite',style='border : solid 1px white')
+                        img(src='http://placehold.it/42x42.jpg')
+                        <strong>Radiateur 1</strong>
+                        a(class='btn btn-success', href='#') ON
+                        a(class='btn btn-danger', href='#') OFF
+                        p
+                li
+                    div(class='thumbmail col-md-4',style='border : solid 1px white')
+                        img(src='http://placehold.it/42x42.jpg')
+                        <strong>lampe 1</strong>
+                        a(class='btn btn-success', href='#') ON
+                        a(class='btn btn-danger', href='#') OFF
+                        p
+                li
+                    div(class='thumbmail col-md-4',style='border : solid 1px white')
+                        img(src='http://placehold.it/42x42.jpg')
+                        <strong>Radiateur 1</strong>
+                        a(class='btn btn-success', href='#') ON
+                        a(class='btn btn-danger', href='#') OFF
+                        p
+        div#zlog(class='col-lg4 col-md-3 hidden-xs hidden-sm fd_antracite') Droite
+    include footer

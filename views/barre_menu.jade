@@ -1,0 +1,45 @@
+div#sidr
+   ul
+     li
+        a(href="/") Pièces
+     li
+        a(href='/piece/all'  ) Tous les modules
+     li
+        a(href='/vnstat/x') Monitor
+     li
+        a(href="/scenari") Séquences
+     li(class="hidden-xs hiiden-sm")
+        a(href='/heure') Horloge
+     li
+        a(href='#',id="btnlogin") User
+.row
+  div#barre_menu
+    div(class='col-xs-2 col-sm-2 col-md-2 col-lg-2') 
+      a#simple-menu(href='#sidr')
+        button(class="btn btn-primary ")
+          span(class="glyphicon glyphicon-th-list")  
+      span 
+        
+    div(class='col-xs-4 col-sm-2 col-md-3 col-lg-1') 
+      div.btn-group
+        button(class='btn btn-primary dropdown-toggle', type='button', data-toggle='dropdown') Modules
+          span.caret 
+        ul(class='dropdown-menu', role='menu')
+          li
+            a(href='/piece/all'  ) Tous
+          li
+            a(href='/piece/bureau' ) Bureau
+          li
+            a(href='/piece/sall') Salle
+          li
+            a(href='/piece/cuisine') Cuisine   
+          li
+            a(href='/piece/chambre') Chambre RDC
+          li
+            a(href='/piece/chambre 1') Chambre 1er Etg
+          li
+            a(href='/piece/SBD') SDB
+     
+.row
+  div(class='col-xs-12 col-sm-7 col-md-7 col-lg-8') 
+    h4(class='text-center') #{title}

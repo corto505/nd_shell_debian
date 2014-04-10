@@ -1,0 +1,14 @@
+[
+{
+  "piece"	: "salle",
+  "type_module"	: "x10",
+  "cde"	: "echo \"PL M4 on\" | nc localhost 1099",
+  "comment"		: "permet d'allumer la lampe M4"
+ },
+ {
+  "piece"	: "salle",
+  "type_module"	: "x10",
+  "cde"	: "echo \"PL M3 on\" | nc localhost 1099",
+  "comment"		: "permet d'allumer la lampe M3"
+ }
+]

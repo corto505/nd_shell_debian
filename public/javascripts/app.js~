@@ -1,0 +1,34 @@
+$( ".trigger" ).on( "click", function() {
+    $( ".result" ).load( "ajax/test.jade" );
+});
+
+$(document).ready( function() {
+
+    $('#btnd').click(function(){
+       var name = $(this).attr('name');
+       var typebtn = $(this).attr('type');
+
+       alert(name+" - "+typebtn);
+    });
+
+
+    $("#btn").click( function() {
+       // alert('This is a custom alert box', 'Alert Dialog');
+	var name = $(this).attr('name');
+	var typebtn = $(this).attr('type');
+	  alert(name+" - "+typebtn);
+	$.ajax({
+	type: "GET",
+	    url: "/ajax/index?name="+name+"&typebtn="+typebtn,
+	error:function(msg){
+	 alert( "Error !: " + msg );
+	},
+	success:function(data){
+	    //affiche le contenu du fichier dans le conteneur dédié
+	    $('#retour').text(data);
+	}
+    });
+
+
+    });
+});

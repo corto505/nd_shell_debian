@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    meta(name="viewport",content="width=device-width", initial-scale="1")
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/flat-ui.css')
+    link(rel='stylesheet', href='/stylesheets/sticky-footer.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    //- SlideControle
+    link(rel='stylesheet', href='/stylesheets/simple-slider.css')
+    
+    script(src='http://code.jquery.com/jquery-1.10.2.js')
+    script(src='/javascripts/bootstrap.min.js')
+    //- SlideControle
+    script(src='/javascripts/simple-slider.min.js')
+    script(src='/javascripts/app.js')
+     
+    script(src='http://192.168.0.70:3000/socket.io/socket.io.js')
+    body
+    block content
+      h1.white *** demo slider ***
+        div#my-input
+        span#output 0000
+        
+      h2  Un autre
+        div#slider( class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" ,aria-disabled="false")
+          div.ui-slider-segment( style="margin-left: 25%;")
+          div.ui-slider-segment( style="margin-left: 25%;")
+          div.ui-slider-segment( style="margin-left: 25%;")
+            div.ui-slider-segment
+            div.ui-slider-segment
+            div.ui-slider-segment
+          div(class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min", style="width: 25%;")
+          a(class="ui-slider-handle ui-state-default ui-corner-all" ,href="#" ,style="left: 25%;")
+         
