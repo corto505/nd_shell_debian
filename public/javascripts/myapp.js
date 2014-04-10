@@ -4,7 +4,7 @@ $( ".trigger" ).on( "click", function() {
 
 $(document).ready( function() {
 
-  	var socket = io.connect('http://192.168.0.70:3000');// voir egalement Layout.jade
+  	var socket = io.connect('http://192.168.101.70:3000');// voir egalement Layout.jade
 
     // ********   Test de bouton  ***********
     $('#btnd').click(function(){

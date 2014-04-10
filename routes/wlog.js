@@ -5,7 +5,7 @@
  exports.writeLog = function (mess,callback){
 	var fs = require ('fs');
 	var config = require ('./config.js').settings;
-	var myLog = config.logFile //'./public/logApp.log';
+	var myLog = config.files.logFile //'./public/logApp.log';
  	
 	var date = new Date();
 	var h = date.getHours();

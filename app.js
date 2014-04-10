@@ -36,19 +36,23 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/test', routes.test);
 app.get('/heure', routes.horloge);
-//app.get('/users', user.list);
-//app.get('/shell',mshell.test);
+app.get('/piece/:id',routes.lirepiece);
+app.get('/led/:etat',routes.led); //affichage dune led etat = 0 ou 1
+
 app.get('/vnstat/:id',mshell.vnstat);
 //app.get('/cron',mshell.readCrontab);
+
 app.get('/ajax_appareil/*',majax.cmdx10_app);
 app.get('/ajax_lampe/*',majax.cmdx10_lmp);
-app.get('/piece/:id',routes.lirepiece);
+
 app.get('/scenari',mscene.index);
 app.get('/scenari/:id',mscene.jouer);
 app.get('/scenari/voir/:id',mscene.voir); //voir le contenu d'un scenario
-app.get('/led/:etat',routes.led); //affichage dune led etat = 0 ou 1
+
 app.get('/devices/',domoticz.liredevices);
 app.get('/devices/ask',domoticz.index);
+app.get('/devices/update',domoticz.updatedevices);
+
 
 var httpServeur = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

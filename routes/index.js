@@ -1,24 +1,8 @@
 //::::::::::::::::::::   Handler   ::::::::::::::::::::::
 var wlog = require('../routes/wlog');
 var url = require('url');
+var toolfile = require ('../routes/toolfile'); // module perso lecture d'un fichier
 
-/**
-* Lit le fichier json !  liste des modules p/ piece
-*/
-function readContent (myFile,callback){
-	var fs = require ('fs');
-  
-	console.log('-  Verification du fichier =>'+myFile);
-  
-	if (fs.existsSync(myFile)){
-		console.log('-  lecture du fichier');
-    
-		fs.readFile(myFile, 'utf8',function(err, content){
-			if (err) return callback(err)
-			callback(null, content)
-		})
-	} else {console.log('*!!* Erreur de fichier'); }
-};
 
 //::::::::::::::::::::   Handler   ::::::::::::::::::::::
 
@@ -43,22 +27,31 @@ exports.horloge = function (req,res){
 ***************************/
 exports.lirepiece = function(req,res){
 	var config = require ('./config.js').settings;
-	var myFile = config.filePieces; //'./public/json/pieces.json';
-
-	readContent( myFile,function (err,content) {
-	console.log('<-  Url '+url.parse(req.url).pathname);
+	var myFile = ''
+	var paramid = req.params.id;
 	
-	lesModules = JSON.parse(content);
-
-	//console.log("-  ",req.params.id);
-  wlog.writeLog(req.params.id,function(err){});
-  
-   if (req.params.id == 'all'){
-    	res.render('modules_all', { modules: lesModules, type_piece : req.params.id, title:req.params.id });
-    } else {
-   res.render('modules', { modules: lesModules, type_piece : req.params.id, title:req.params.id });
-  }
+	console.log(' param => '+paramid);
+	
+	if (paramid=='dmtcz') {
+		myFile = config.files.fileDevicesNode; //'./public/json/pieces.json';
+	}else
+		myFile = config.files.filePieces; //'./public/json/pieces.json';
+		
+	toolfile.readContent( myFile,function (err,content) {
+		console.log('<-  Url '+url.parse(req.url).pathname);
+		
+		lesModules = JSON.parse(content);
+	
+		//console.log("conent : \n  ",lesModules);
+		wlog.writeLog(req.params.id,function(err){});
+	  
+	   if ((paramid == 'all') || (paramid=='dmtcz') ){
+		res.render('modules_all', { modules: lesModules, type_piece : 'all', title:req.params.id });
+	    } else {
+		res.render('modules', { modules: lesModules, type_piece : req.params.id, title:req.params.id });
+	  }
 })
+	
 };
 
 //::::::::::::::::::::   *** TEST  ****   Handler   ::::::::::::::::::::::

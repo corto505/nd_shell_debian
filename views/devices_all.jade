@@ -8,24 +8,39 @@ block content
         table(class='table table-condensed')
           - for i in modules
              - var usage = i.Used;
+             if(i.SwitchType=='Dimmer')
+                - var type_module = 'lampe'
+             else
+                - var type_module = 'appareil'
+             
              
              if( usage ===1)
                 tr
                   td(style="vertical-align:top;")
-                    h6 #{i.idx}
+                    if(i.SubType=='X10')
+                      h6 #{lettreHouse}#{i.Unit}
+                    else
+                      h6 #{i.idx}
                   td(style="vertical-align:middle;")
                     small
                       p #{i.Name}
                       p
                         small #{i.SubType}
                     
-                  td
-                     button(class='btn btn-success btn-lg btnaction', typebtn='on', name='#{i.idx}')
-                       span(class='glyphicon glyphicon-ok-circle')
-                  td
-                     button(class='btn btn-danger btn-lg btnaction', typebtn='Off', name='#{i.idx}')
-                       span(class='glyphicon glyphicon-remove-circle')
-
+                  if(i.SubType=='X10')
+                    td
+                       button(class='btn btn-success btn-lg btn_' type_module, typebtn='on', name='#{lettreHouse}#{i.Unit}')
+                         span(class='glyphicon glyphicon-ok-circle')
+                    td
+                       button(class='btn btn-danger btn-lg btn_type_module', typebtn='Off', name='#{lettreHouse}#{i.Unit}')
+                         span(class='glyphicon glyphicon-remove-circle')
+                  else
+                    td
+                       button(class='btn btn-success btn-lg btn_type_module', typebtn='on', name='#{i.idx}')
+                         span(class='glyphicon glyphicon-ok-circle')
+                    td
+                       button(class='btn btn-danger btn-lg btnaction', typebtn='Off', name='#{i.idx}')
+                         span(class='glyphicon glyphicon-remove-circle')
                 
      div(class='zlog col-lg-4 col-md-4 hidden-xs hidden-sm bg-primary') Droite
        div(class='tracelog bg-warning', id='tmplt', style='display: none')
