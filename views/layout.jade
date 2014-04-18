@@ -16,7 +16,8 @@ html
     
     script(src='/javascripts/jquery.sidr.min.js')
     
-    script(src='http://192.168.101.70:3000/socket.io/socket.io.js')
+    script(src='http://192.168.0.70:3000/socket.io/socket.io.js')
+    script(src='/javascripts/angular.min.js')
     script(src='/javascripts/myapp.js')
-  body
+  body(ng-app="domo")
     block content

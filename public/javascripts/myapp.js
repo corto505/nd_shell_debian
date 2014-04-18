@@ -1,10 +1,25 @@
-$( ".trigger" ).on( "click", function() {
-    $( ".result" ).load( "ajax/test.jade" );
+
+var app = angular.module('domo',[]);
+
+
+app.controller('myCtrl', function ($scope,$http){
+  $scope.prime = 'chargement';
+  $scope.pieceMenu = [];
+
+  $http.get('menu.piece.json').success(function(data){
+    $scope.pieceMenu = data;
+    $scope.prime = 'en attente evenement';
+  })
+
 });
 
 $(document).ready( function() {
 
-  	var socket = io.connect('http://192.168.101.70:3000');// voir egalement Layout.jade
+$( ".trigger" ).on( "click", function() {
+    $( ".result" ).load( "ajax/test.jade" );
+});
+
+  	var socket = io.connect('http://192.168.0.70:3000');// voir egalement Layout.jade
 
     // ********   Test de bouton  ***********
     $('#btnd').click(function(){

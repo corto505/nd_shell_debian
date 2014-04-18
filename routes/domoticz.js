@@ -62,7 +62,7 @@ exports.liredevices = function(req,res){
       res.render('devices_all', {
 	 modules: myobj,
 	 type_piece : 'Liste modules domotics',
-	 lettreHouse : config.lettreHouse,
+	 lettreHouse : config.lettreHouse
 	 
        });
      });
