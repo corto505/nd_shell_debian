@@ -9,13 +9,27 @@ var toolfile = require ('../routes/toolfile'); // module perso lecture d'un fich
  * GET home page.
  ***********************************************/
 exports.index = function(req, res){
+  
+      // res.render('menu');
+    requete_http('/json.htm?type=status-temp',function(chunk){
+      res.json(JSON.parse(chunk));
+    })
+    
+  };
+ 
+ 
+/************************************************
+ * execut une requte HTTP sur le sserveur Domoticz
+ ***********************************************/
+function requete_http (url,callback){
+  
   var http = require ('http');
   var config = require ('./config.js').settings;
   
   var options = {
     host: config.domoticz.host,
     port: config.domoticz.port,
-    path: '/json.htm?type=devices&rid=3',
+    path: url,
     method: config.domoticz.method,
     headers:{
       accept: 'application/json'
@@ -25,17 +39,18 @@ exports.index = function(req, res){
   //curl http://192.168.0.66:8080/json.htm?type=devices&rid=3
   var req = http.request(options, function(response){
 	response.on('data',function(chunk){
-        console.log('BODY'+chunk);
+	  console.log('BODY'+chunk);
+	  callback(chunk);
 	});
+	
   }).on('error', function(e){
 	console.log('erreur = '+e.message);
+	return callback;
   });
   
  req.end();
-
- };
-
-
+  
+}
 
 /************************************************
 * Affiche les modules d'une pieces

@@ -11,7 +11,7 @@ exports.settings =
 		,
 	domoticz : {
 	
-		host : "192.168.0.70",
+		host : "192.168.0.66",
 		port : 8080,
 		Method : 'GET'
 	},

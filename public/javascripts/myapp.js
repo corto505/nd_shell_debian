@@ -1,26 +1,51 @@
-
+//:::::::::::   ANGULAR  :::::::::::::::::
 var app = angular.module('domo',[]);
 
 
 app.controller('myCtrl', function ($scope,$http){
-  $scope.prime = 'chargement';
-  $scope.pieceMenu = [];
-
-  $http.get('menu.piece.json').success(function(data){
-    $scope.pieceMenu = data;
-    $scope.prime = 'en attente evenement';
-  })
+  
+  /**   Lecture des thermo via Domoticz  **/
+  $http.get('/devices/temp')
+    .success (function(data){
+	   $scope.meteo  = data.result;  
+	  $scope.prime = 'en attente evenement';
+    })
+    .error(function(data){
+	$scope.prime = "erreur ";
+    });
 
 });
 
+//:::::::::::::  JQUERY :::::::::::::::::
 $(document).ready( function() {
 
-$( ".trigger" ).on( "click", function() {
-    $( ".result" ).load( "ajax/test.jade" );
-});
+    //:::::::              EVENT ON CLICK                 :::::::
+     
+     //----    affiche la div Menu -----
+    $('#btnMenu').click(function (){
+          $('.tabxxx').fadeOut('slow', function (){
+                $('#tabMenu').fadeIn();
+            });
+    });
+   
+   //-----    affiche la div Meteo  ------
+   $('#btnMeteo').click(function (){
+          $('.tabxxx').fadeOut('slow', function (){
+                $('#tabMeto').fadeIn();
+            });
+    });
+   //-----    affiche la div Horloge  ------
+   $('#btnClock').click(function (){
+          $('.tabxxx').fadeOut('slow', function (){
+                $('#tabClock').fadeIn();
+            });
+    });
+   
+    $( ".trigger" ).on( "click", function() {
+	$( ".result" ).load( "ajax/test.jade" );
+    });
 
-  	var socket = io.connect('http://192.168.0.70:3000');// voir egalement Layout.jade
-
+ 
     // ********   Test de bouton  ***********
     $('#btnd').click(function(){
        var name = $(this).attr('name');
@@ -97,45 +122,22 @@ $( ".trigger" ).on( "click", function() {
 
     });
     
-//***********  SLIDER (Annuler)  **************
+    
+     //------- CALENDRIER  ---------
+   var madate = new Date();
+   var nomDesJours = new Array('dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi');
+   var indicejour = madate.getDay();
+   var lejour = madate.getDate();
+ 
+   $('#jour').html(lejour);
+   $('#mois').html(nomDesJours[indicejour]);
 
-//$('.my-input').bind("slider:changed", function (event,data){
-//	$('#output').html(parseInt(data.value.toFixed(3)*31));
-	//alert(data.value);
-//});
 
 //***********  MENU PUSH LEFT  **************
 
 $('#simple-menu').sidr();	
 	
 	
-// *********  Test de socket  ************
-	$(document).ready( logAuChargement());
-  
-  function logAuChargement(){
-    socket.emit('login',{name : 'sarah'});
-  };
-  
-  //Btn login de la barre de menu
-	$('#btnlogin').click(function (event){ // envoi client
-	alert('send login');
-	//	socket.emit('login',{name : 'sarah'});
-	});
-  // reponse du serveur 
-  socket.on('replogin',function(mess){ //reponse serveur
-  	//alert('retour du serveur: '+mess);
-  });
-  
-   // reponse serveur message_client  ex : cmd X10
-	socket.on('repserv',function(mess){ //reponse serveur
-			
-		var pipo = JSON.stringify(mess);
-		//alert('retour du serveur');
-    var tmplt = $('#tmplt').html();
-    $('tmplt').remove();
-    
-    $('.zlog').append(tmplt.replace('xxxxx',mess.h+':'+mess.m+'   '+mess.message+' ('+mess.user.name+')'));
-		//$('#retourio').text(mess.repMessage);
-	});
+
 
 });

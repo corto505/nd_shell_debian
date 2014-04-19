@@ -1,34 +1,47 @@
 extends layout
 
 block content  
-  
 
   include barre_menu  
-  .row(id="untest" ng-controller="myCtrl")
-      test anuglar {{prime}}
-      div(class='col-xs-offset-1 col-xs-11 col-sm-10 col-lg-6 col-md-6')
-        ul(class='nav nav-pills nav-stacked')
-            li(class='btn btn-primary')
-              a(href="/piece/bureau", class='white') Bureau
-            li(class='btn btn-primary')
-              a(href="/piece/salle", class='white') Salle
-            li(class='btn btn-primary')
-              a(href="/piece/cuisine", class='white') Cuisine
-            li(class='btn btn-primary')
-              a(href="/piece/chambre", class='white') Chambre RDC
-            li(class='btn btn-primary')
-              a(href="/piece/chambre 1", class='white') Chambre 1er etg
-            li(class='btn btn-primary')
-              a(href="/piece/SBD", class='white') SDB
-            br
-            br
-        ul(class='nav nav-pills nav-stacked' ng-repeat='piece in pieceMenu')
-            li(class='btn btn-primary')
-              a(href="{{piece.url}}", class='white') {{piece.nom}}
+  .row(id="mainContent")
+    div.row
+      div(id="ladate")
+        div(id="bartop")
+          span(id="mois") ssss
+        div(id="jour") sss
+  
+    .row.tabxxx(id="tabMeto" ng-controller="myCtrl")     
+      div(class="btn-menu-dg col-xs-12 col-sm-12 col-md-4" ng-repeat='temp in meteo')
+        a(href="#")
+           div.pull-left
+              img(class="img-responsive pull-left" src="/images/thermo.jpg")
+                  
+           div.pull-left
+              p {{temp.Name}} (idx : {{temp.idx}})
+              h3.text-center {{temp.Temp}} &#176; 
+              p Date : {{temp.LastUpdate}}
+        
+    button(class="btn btn-primary" id="btnMenu" type="button") Menu          
+     
+    .row.tabxxx(id="tabMenu" style="display:none;")
+      
+      button(class="btn btn-primary" id="btnMeteo" type="button") Meteo
+  
+    .row.tabxxx(id="tabClock" style="display:none;")
+      div.container(class='hidden-xs')
+        div#fancyClock
+    
+    button(class="btn btn-primary" id="btnClock" type="button") Horloge
+  
+  div(class='zlog col-lg-4 col-md-4 hidden-xs hidden-sm bg-primary') 
+  div(class='tracelog bg-warning', id='tmplt', style='display: none')
+    div#retourio
+      small xxxxx
+      
+   script
+      $(document).ready( function() {
+      /* This code is executed after the DOM has been completely loaded */
+      $('#fancyClock').tzineClock();
+      });   
 
-
-      div(class='zlog col-lg-4 col-md-4 hidden-xs hidden-sm bg-primary') Droite
-      div(class='tracelog bg-warning', id='tmplt', style='display: none')
-        div#retourio
-          small xxxxx
-   
+ 

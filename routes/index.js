@@ -14,13 +14,14 @@ exports.index = function(req, res){
   res.render('menu', { title: 'Piece' });
  };
 
-/****************
-*  Affiche une page avec une horloge
-*****************/
-exports.horloge = function (req,res){
-  res.render('horloge');
-};
 
+/**************************
+* Affiche les modules d'une pieces
+* Nw : 18-04-2014
+* *************************/
+exports.lire_temp = function (req,res){
+	
+}
 
 /**************************
 * Affiche les modules d'une pieces

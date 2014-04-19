@@ -1,19 +1,31 @@
-body,h1,h2,h3,p,quote,small,form,input,ul,li,ol,label{
-	/* Simple page reset */
-	margin:0;
-	padding:0;
-}
+
 
 body {
    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color : #222;
 color :white;
+-moz-box-sizing: border-box;
+       box-sizing: border-box;
 
 }
 
+#mainContent{
+	margin : 12px;	
+}
+
+#bar-top {
+  background-color: #1abc9c;
+  width: 100%;
+  height: 52px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
 #barre_menu{
- margin-top : 30px;
- padding-left : 0px;
+ margin-top : 4px;
+ padding-left : 15px;
 }
 
 #footer{
@@ -26,6 +38,152 @@ color :white;
 
 .fd_antracite {
     background-color : #333;
+}
+
+/**      LES BOUTONS  ****/
+
+#btnMeteo, #btnMenu{
+	position:absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+#btnClock{
+	position:absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+/* line 33, ../sass/mystyle.scss */
+.btn-menu-dg {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, #222222), color-stop(100%, #555555));
+  background-image: -webkit-linear-gradient(top left, #222222, #555555);
+  background-image: -moz-linear-gradient(top left, #222222, #555555);
+  background-image: -o-linear-gradient(top left, #222222, #555555);
+  background-image: linear-gradient(top left, #222222, #555555);
+  border: solid #555 1px;
+  margin: 7px;
+}
+/* line 40, ../sass/mystyle.scss */
+.btn-menu-dg h3 {
+  margin: auto;
+}
+/* line 43, ../sass/mystyle.scss */
+.btn-menu-dg a {
+  color: white;
+}
+/* line 46, ../sass/mystyle.scss */
+.btn-menu-dg a p {
+  color: #ccc;
+}
+/* line 50, ../sass/mystyle.scss */
+.btn-menu-dg img {
+  margin-left: -15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+
+/**   Calendrier ***/
+
+#ladate {
+  margin: 15px auto 25px auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  width: 200px;
+  background-color: white;
+}
+
+#ladate #bartop {
+  width: 100%;
+  background-color: red;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+}
+
+#ladate #jour {
+  font-size: 5em;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+  color: black;
+  font-weight: bold;
+}
+
+#ladate #mois {
+  font-size: 1.5em;
+}
+
+/*** description des modules */
+/* line 83, ../sass/mystyle.scss */
+.inter {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, #000000), color-stop(100%, #777777));
+  background-image: -webkit-linear-gradient(left top, #000000, #777777);
+  background-image: -moz-linear-gradient(left top, #000000, #777777);
+  background-image: -o-linear-gradient(left top, #000000, #777777);
+  background-image: linear-gradient(left top, #000000, #777777);
+  border: solid #444 1px;
+  -webkit-box-shadow: white;
+  -moz-box-shadow: white;
+  box-shadow: white;
+  width: 330px;
+}
+/* line 89, ../sass/mystyle.scss */
+.inter .content {
+  height: 170px;
+  padding-top: 30px;
+}
+/* line 93, ../sass/mystyle.scss */
+.inter .bandeau {
+  padding: 2px;
+  font-size: 1.5em;
+  text-align: center;
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #444444), color-stop(100%, #111111));
+  background-image: -webkit-linear-gradient(bottom, #444444, #111111);
+  background-image: -moz-linear-gradient(bottom, #444444, #111111);
+  background-image: -o-linear-gradient(bottom, #444444, #111111);
+  background-image: linear-gradient(bottom, #444444, #111111);
+}
+/* line 99, ../sass/mystyle.scss */
+.inter .bouttons {
+  float: right;
+  margin-right: 10px;
+}
+/* line 103, ../sass/mystyle.scss */
+.inter .footer {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #111111));
+  background-image: -webkit-linear-gradient(top, #444444, #111111);
+  background-image: -moz-linear-gradient(top, #444444, #111111);
+  background-image: -o-linear-gradient(top, #444444, #111111);
+  background-image: linear-gradient(top, #444444, #111111);
+}
+/* line 105, ../sass/mystyle.scss */
+.inter .footer span {
+  font-size: 0.5em;
 }
 
 

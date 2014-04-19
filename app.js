@@ -4,7 +4,7 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
+var routes = require('./routes'); // fichier index
 var majax = require('./routes/ajax_rt');
 var mscene = require('./routes/scenari_rt');
 var mshell = require('./routes/shell_rt');
@@ -13,6 +13,11 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
+
+app.locals({
+  mylog : 'oui',  // log trace wlog
+  i_O : 'non'  // io socket
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -35,7 +40,6 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/test', routes.test);
-app.get('/heure', routes.horloge);
 app.get('/piece/:id',routes.lirepiece);
 app.get('/led/:etat',routes.led); //affichage dune led etat = 0 ou 1
 
@@ -50,7 +54,7 @@ app.get('/scenari/:id',mscene.jouer);
 app.get('/scenari/voir/:id',mscene.voir); //voir le contenu d'un scenario
 
 app.get('/devices/',domoticz.liredevices);
-app.get('/devices/ask',domoticz.index);
+app.get('/devices/temp',domoticz.index);
 app.get('/devices/update',domoticz.updatedevices);
 
 
@@ -61,46 +65,47 @@ var httpServeur = http.createServer(app).listen(app.get('port'), function(){
 
 
 //:::::::::::::   gestion des sockets  :::::::::::::
-var io = require ('socket.io').listen(httpServeur, {log : false});
-var messages = [];
-var maxMess = 10;
-
-io.sockets.on('connection', function (socket){
-	console.log('=> io : connection client');
-	
-	var me;
-	// on affiches les anciens messages pour les new users
-	for (var k in messages){
-		socket.emit('repserv', messages[k]);
-    console.log('***** '+messages[k].message);
-	}
-	
-	
-	/**
-	*   je me connecte
-	*/
-	socket.on('login',function(user){
-		console.log(user);
-		me = user;
-		me.name = user.name;
-		io.sockets.emit('replogin',{repMessage : 'login accepté'});
-	});
-	
-	/***
-	*  On a recu un messsage
-	*/
-  socket.on('messclient', function (messcli){
-  	//console.log('+1 '+messcli.message);
-  	messcli.user = me;
-  	date = new Date();
-  	messcli.h = date.getHours();
-  	messcli.m = date.getMinutes();
-  	
-  	messages.push(messcli);
-  	if (messages.lenght > maxMess ) {
-  		messages.shift();
-  	}
-    io.sockets.emit('repserv',messcli); // on retourn le mess à ts les clients
+if(app.locals.mylog=='oui'){
+  var io = require ('socket.io').listen(httpServeur, {log : false});
+  var messages = [];
+  var maxMess = 10;
+  
+  io.sockets.on('connection', function (socket){
+	  console.log('=> io : connection client');
+	  
+	  var me;
+	  // on affiches les anciens messages pour les new users
+	  for (var k in messages){
+		  socket.emit('repserv', messages[k]);
+      console.log('***** '+messages[k].message);
+	  }
+	  
+	  
+	  /**
+	  *   je me connecte
+	  */
+	  socket.on('login',function(user){
+		  console.log(user);
+		  me = user;
+		  me.name = user.name;
+		  io.sockets.emit('replogin',{repMessage : 'login accepté'});
+	  });
+	  
+	  /***
+	  *  On a recu un messsage
+	  */
+    socket.on('messclient', function (messcli){
+	  //console.log('+1 '+messcli.message);
+	  messcli.user = me;
+	  date = new Date();
+	  messcli.h = date.getHours();
+	  messcli.m = date.getMinutes();
+	  
+	  messages.push(messcli);
+	  if (messages.lenght > maxMess ) {
+		  messages.shift();
+	  }
+      io.sockets.emit('repserv',messcli); // on retourn le mess à ts les clients
+    });
   });
-});
-
+}
