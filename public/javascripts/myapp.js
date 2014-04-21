@@ -1,17 +1,47 @@
 //:::::::::::   ANGULAR  :::::::::::::::::
 var app = angular.module('domo',[]);
 
-
-app.controller('myCtrl', function ($scope,$http){
+//  page index  Gestion des thermo
+app.controller('ctrlThermo', function ($scope,$http){
   
   /**   Lecture des thermo via Domoticz  **/
   $http.get('/devices/temp')
     .success (function(data){
 	   $scope.meteo  = data.result;  
-	  $scope.prime = 'en attente evenement';
-    })
+   })
     .error(function(data){
 	$scope.prime = "erreur ";
+    });
+
+});
+
+//    Page index  gestion des boutons
+app.controller('ctrlBtn', function ($scope,$http){
+  
+  /**   Lecture fichier json pour les bouttons  **/
+  $http.get('/tdb')
+    .success (function(data){
+	   $scope.lesBouttons  = data;  
+    })
+    .error(function(data){
+	//$scope.prime = "erreur ";
+    });
+
+});
+
+// page all_module
+app.controller('ctrlModule', function ($scope,$http){
+  
+  /**   Lecture fichier json pour les bouttons  **/
+  $http.get('/devices/listeinter')
+    .success (function(data){
+	
+	//console.log('===>  Controler');
+	   $scope.listeModules  = data;
+	   
+    })
+    .error(function(data){
+	//$scope.prime = "erreur ";
     });
 
 });

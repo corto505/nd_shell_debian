@@ -10,7 +10,8 @@ block content
           span(id="mois") ssss
         div(id="jour") sss
   
-    .row.tabxxx(id="tabMeto" ng-controller="myCtrl")     
+  
+    .row.tabxxx(id="tabMeto" ng-controller="ctrlThermo")     
       div(class="btn-menu-dg col-xs-12 col-sm-12 col-md-4" ng-repeat='temp in meteo')
         a(href="#")
            div.pull-left
@@ -23,8 +24,17 @@ block content
         
     button(class="btn btn-primary" id="btnMenu" type="button") Menu          
      
-    .row.tabxxx(id="tabMenu" style="display:none;")
-      
+     
+    .row.tabxxx(id="tabMenu" style="display:none;" ng-controller="ctrlBtn")
+      div(class="btn-menu-dg col-xs-12 col-sm-12 col-md-4" ng-repeat='choix in lesBouttons')
+        a(href="{{choix.url}}")
+           div.pull-left
+              img(class="img-responsive pull-left" src="/images/{{choix.icone}}")
+                  
+           div.pull-left
+              h3 {{choix.nom}}
+              p Date : {{choix.detail}}
+              
       button(class="btn btn-primary" id="btnMeteo" type="button") Meteo
   
     .row.tabxxx(id="tabClock" style="display:none;")
@@ -38,10 +48,11 @@ block content
     div#retourio
       small xxxxx
       
-   script
-      $(document).ready( function() {
-      /* This code is executed after the DOM has been completely loaded */
-      $('#fancyClock').tzineClock();
-      });   
+  
+  script 
+    $(document).ready( function() { 
+    /* This code is executed after the DOM has been completely loaded */ 
+    $('#fancyClock').tzineClock(); 
+    }); 
 
  

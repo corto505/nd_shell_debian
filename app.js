@@ -5,19 +5,14 @@
 
 var express = require('express');
 var routes = require('./routes'); // fichier index
-var majax = require('./routes/ajax_rt');
-var mscene = require('./routes/scenari_rt');
+//var majax = require('./routes/ajax_rt');
+//var mscene = require('./routes/scenari_rt');
 var mshell = require('./routes/shell_rt');
 var domoticz = require('./routes/domoticz');
 var http = require('http');
 var path = require('path');
 
 var app = express();
-
-app.locals({
-  mylog : 'oui',  // log trace wlog
-  i_O : 'non'  // io socket
-});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -40,23 +35,25 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/test', routes.test);
-app.get('/piece/:id',routes.lirepiece);
+app.get('/tdb', routes.lireBtnTdb);  //btn du tableau de bord
+app.get('/piece',routes.lirepiece);
 app.get('/led/:etat',routes.led); //affichage dune led etat = 0 ou 1
 
 app.get('/vnstat/:id',mshell.vnstat);
 //app.get('/cron',mshell.readCrontab);
 
-app.get('/ajax_appareil/*',majax.cmdx10_app);
-app.get('/ajax_lampe/*',majax.cmdx10_lmp);
+//app.get('/ajax_appareil/*',majax.cmdx10_app);
+//app.get('/ajax_lampe/*',majax.cmdx10_lmp);
 
-app.get('/scenari',mscene.index);
-app.get('/scenari/:id',mscene.jouer);
-app.get('/scenari/voir/:id',mscene.voir); //voir le contenu d'un scenario
+//app.get('/scenari',mscene.index);
+//app.get('/scenari/:id',mscene.jouer);
+//app.get('/scenari/voir/:id',mscene.voir); //voir le contenu d'un scenario
 
-app.get('/devices/',domoticz.liredevices);
-app.get('/devices/temp',domoticz.index);
+app.get('/devices',domoticz.index); // menu accueil + thermo
+//app.get('/devices/listescene',domoticz.listescenes); 
+app.get('/devices/listeinter',domoticz.listeinter); // menu accueil + thermo
 app.get('/devices/update',domoticz.updatedevices);
-
+app.get('/devices/file',domoticz.lirefiledevices); //en attente
 
 var httpServeur = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

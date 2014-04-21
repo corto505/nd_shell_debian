@@ -6,7 +6,7 @@ var toolfile = require ('../routes/toolfile'); // module perso lecture d'un fich
 //::::::::::::::::::::   Handler   ::::::::::::::::::::::
 
 /************************************************
- * GET home page.
+ * GET home page. => Liste des thermos
  ***********************************************/
 exports.index = function(req, res){
   
@@ -18,6 +18,35 @@ exports.index = function(req, res){
   };
  
  
+ /************************************************
+ *       Liste des scenes DOMOTICZ
+ ***********************************************/
+exports.listescene = function(req, res){
+  
+      // res.render('menu');
+    requete_http('/json.htm?type=scenes',function(chunk){
+      res.json(JSON.parse(chunk));
+    })
+    
+  };
+  
+ /************************************************
+ *       Liste des ts les inter
+ ***********************************************/
+exports.listeinter = function(req, res){
+  
+      // res.render('menu');
+    requete_http('/json.htm?type=devices&filter=switchlight&used=true&order=Name',function(chunk){
+      
+     var result = JSON.parse(chunk);
+     
+     // console.log('===>  listeinter'+result);
+       res.json(result.result); 
+    })
+    
+  };
+  
+  
 /************************************************
  * execut une requte HTTP sur le sserveur Domoticz
  ***********************************************/
@@ -38,9 +67,15 @@ function requete_http (url,callback){
     
   //curl http://192.168.0.66:8080/json.htm?type=devices&rid=3
   var req = http.request(options, function(response){
+	var str='';
 	response.on('data',function(chunk){
-	  console.log('BODY'+chunk);
-	  callback(chunk);
+	  str+= chunk;
+	});
+	
+	response.on('end',function(){
+	  console.log('==> end'+str);
+	  callback(str);
+	  
 	});
 	
   }).on('error', function(e){
@@ -55,7 +90,7 @@ function requete_http (url,callback){
 /************************************************
 * Affiche les modules d'une pieces
 ***********************************************/
-exports.liredevices = function(req,res){
+exports.lirefiledevices = function(req,res){
     var config = require ('./config.js').settings;
     var myFile = config.files.fileDevices; //'./public/json/pieces.json';
 

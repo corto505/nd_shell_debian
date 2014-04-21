@@ -2,11 +2,12 @@ exports.settings =
 {
 	files: 
 	{	
-		filePieces : './public/json/pieces.json',
-		logFile	   : '/public/logApp.log',
-		sceneFolder : './public/scenari/',
-		fileDevices : './public/json/devices.json',
-		fileDevicesNode : './public/json/devices_node.json'
+		filePieces     : './public/json/pieces.json', // A supprimer ??
+		logFile	       : '/public/logApp.log',
+		sceneFolder    : './public/scenari/', // a suprimer
+		fileDevices    : './public/json/devices.json', //fichier DOMOTICZ
+		fileDevicesNode : './public/json/devices_node.json',  // fichier DOMOTICZ converti
+		fileTdb        : './public/json/boutonTdb.json' // liste des boutons du tableau de bord
 	}
 		,
 	domoticz : {

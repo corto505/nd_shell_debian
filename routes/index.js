@@ -6,9 +6,11 @@ var toolfile = require ('../routes/toolfile'); // module perso lecture d'un fich
 
 //::::::::::::::::::::   Handler   ::::::::::::::::::::::
 
-/****************
- * GET home page.
- ***************/
+/****************************************
+ * GET home page. (Thermo , TDB , Horloge)
+ * Thermo se fait via ANGULAR, horloge plug JS,
+ * TDB lecture fichier Json
+ *****************************************/
 exports.index = function(req, res){
  // wlog.writeLog('Acces menu',function(err){ console.log('=> ecrit log ');  });
   res.render('menu', { title: 'Piece' });
@@ -16,43 +18,34 @@ exports.index = function(req, res){
 
 
 /**************************
-* Affiche les modules d'une pieces
-* Nw : 18-04-2014
-* *************************/
-exports.lire_temp = function (req,res){
+* Affiche les boutons du tableau de bord
+* à partir d'un fichier /public/json => Traite par ANGULAR
+*  routes  = /tdb
+***************************/
+exports.lireBtnTdb = function(req,res){
+	var config = require('./config.js').settings;
+	var myFile = config.files.fileTdb;
+	
+	
+	toolfile.readContent(myFile, function(err,content){
+	
+	lesBtn = JSON.parse(content);
+	console.log(' Boutton => '+lesBtn);
+		
+	res.json(lesBtn);	
+	});
 	
 }
 
 /**************************
-* Affiche les modules d'une pieces
+* Appel la page Gestion des modules par pieces
+* PARAM / nom_de_lapiece
+* routes /piece/:nom
 ***************************/
 exports.lirepiece = function(req,res){
-	var config = require ('./config.js').settings;
-	var myFile = ''
-	var paramid = req.params.id;
+	var paramid = req.params.nom;
 	
-	console.log(' param => '+paramid);
-	
-	if (paramid=='dmtcz') {
-		myFile = config.files.fileDevicesNode; //'./public/json/pieces.json';
-	}else
-		myFile = config.files.filePieces; //'./public/json/pieces.json';
-		
-	toolfile.readContent( myFile,function (err,content) {
-		console.log('<-  Url '+url.parse(req.url).pathname);
-		
-		lesModules = JSON.parse(content);
-	
-		//console.log("conent : \n  ",lesModules);
-		wlog.writeLog(req.params.id,function(err){});
-	  
-	   if ((paramid == 'all') || (paramid=='dmtcz') ){
-		res.render('modules_all', { modules: lesModules, type_piece : 'all', title:req.params.id });
-	    } else {
-		res.render('modules', { modules: lesModules, type_piece : req.params.id, title:req.params.id });
-	  }
-})
-	
+	res.render('modules_all', { title:req.params.id });
 };
 
 //::::::::::::::::::::   *** TEST  ****   Handler   ::::::::::::::::::::::

@@ -3,42 +3,27 @@ extends layout
 block content
   include barre_menu
   
-  .row
+  .row(ng-controller="ctrlModule")
+    
     div(class='col-xs-12 col-sm-12 col-md-8 col-lg-8')
-        table(class='table table-condensed')
-          for item in modules
-             - var piece = item.piece
-             
-             if type_piece == 'all'
-                - go = true
-             else
-                - go =  piece==type_piece 
-                
-             if go
-              tr
-                td(style="vertical-align:top;")
-                  h6 #{item.code}
-                td(style="vertical-align:middle;")
-                  small
-                    p #{item.nom}
-                    if type_piece == 'all'
-                      p
-                        small(class='text-warning') #{item.piece}
-                if item.actif=='oui' 
-                  td
-                    button(class='btn btn-success btn-lg btn_#{item.type_module}', typebtn='on', name='#{item.code}')
-                      span(class='glyphicon glyphicon-ok-circle')
-                  td
-                    button(class='btn btn-danger btn-lg btn_#{item.type_module}', typebtn='off', name='#{item.code}')
-                      span(class='glyphicon glyphicon-remove-circle')
-                else
-                  td
-                    x
-                  td
-                    x
-                
-     div(class='zlog col-lg-4 col-md-4 hidden-xs hidden-sm bg-primary') Droite
-       div(class='tracelog bg-warning', id='tmplt', style='display: none')
-         div#retourio xxxxx
+      table(class='table table-condensed')
+        tr(ng-repeat='module in listeModules')
+          td(style="vertical-align:top;")
+            h6 {{module.idx}}
+          td(style="vertical-align:middle;")
+            small
+              p
+                small(class='text-warning') {{module.Name}}          
+          td
+            button(class='btn btn-success btn-lg btn_', typebtn='on', name='btn')
+              span(class='glyphicon glyphicon-ok-circle')
+          td
+            button(class='btn btn-danger btn-lg btn_', typebtn='off', name='btn')
+              span(class='glyphicon glyphicon-remove-circle') 
+      
+  
+  div(class='zlog col-lg-4 col-md-4 hidden-xs hidden-sm bg-primary') Droite
+    div(class='tracelog bg-warning', id='tmplt', style='display: none')
+      div#retourio xxxxx
   include footer
  
