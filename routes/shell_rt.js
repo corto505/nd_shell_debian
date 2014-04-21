@@ -52,7 +52,7 @@ exports.vnstat = function (req,res){
     
     if (myScript !='xx'){
            execShell(myScript, function (err,content) {
-        console.log(content);
+       // console.log(content);
       // res.render('vnstat',{states: content,title:'vnstat '+ordre}); 
        res.send(content);
     });

@@ -12,11 +12,17 @@ var toolfile = require ('../routes/toolfile'); // module perso lecture d'un fich
  * TDB lecture fichier Json
  *****************************************/
 exports.index = function(req, res){
- // wlog.writeLog('Acces menu',function(err){ console.log('=> ecrit log ');  });
   res.render('menu', { title: 'Piece' });
  };
 
+// affiche le tableau de bord => contenu = angular
 
+exports.affichetdb = function(req, res){
+	console.log(' affiche le tablea de bord');
+   res.render('tdb', { title: 'Tableau debord' });
+ };
+ 
+ 
 /**************************
 * Affiche les boutons du tableau de bord
 * à partir d'un fichier /public/json => Traite par ANGULAR
@@ -26,13 +32,12 @@ exports.lireBtnTdb = function(req,res){
 	var config = require('./config.js').settings;
 	var myFile = config.files.fileTdb;
 	
-	
 	toolfile.readContent(myFile, function(err,content){
 	
-	lesBtn = JSON.parse(content);
-	console.log(' Boutton => '+lesBtn);
+		lesBtn = JSON.parse(content);
+		//console.log(' Boutton => '+lesBtn);
 		
-	res.json(lesBtn);	
+		res.json(lesBtn);	  
 	});
 	
 }
@@ -45,7 +50,14 @@ exports.lireBtnTdb = function(req,res){
 exports.lirepiece = function(req,res){
 	var paramid = req.params.nom;
 	
-	res.render('modules_all', { title:req.params.id });
+	if (paramid =='all'){
+		paramid='';
+		//console.log('==> param '+paramid);
+		res.render('modules_all', { nomPiece:paramid });
+	}else{
+		res.render('modules', { nomPiece:paramid });
+	}
+	
 };
 
 //::::::::::::::::::::   *** TEST  ****   Handler   ::::::::::::::::::::::

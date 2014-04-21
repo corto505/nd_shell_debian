@@ -11,7 +11,7 @@ block content
         div(id="jour") sss
   
   
-    .row.tabxxx(id="tabMeto" ng-controller="ctrlThermo")     
+    .row(id="tabMeto" ng-controller="ctrlThermo")     
       div(class="btn-menu-dg col-xs-12 col-sm-12 col-md-4" ng-repeat='temp in meteo')
         a(href="#")
            div.pull-left
@@ -22,26 +22,14 @@ block content
               h3.text-center {{temp.Temp}} &#176; 
               p Date : {{temp.LastUpdate}}
         
-    button(class="btn btn-primary" id="btnMenu" type="button") Menu          
+      button(class="btn btn-info" id="btnClock" type="button") Horloge         
      
-     
-    .row.tabxxx(id="tabMenu" style="display:none;" ng-controller="ctrlBtn")
-      div(class="btn-menu-dg col-xs-12 col-sm-12 col-md-4" ng-repeat='choix in lesBouttons')
-        a(href="{{choix.url}}")
-           div.pull-left
-              img(class="img-responsive pull-left" src="/images/{{choix.icone}}")
-                  
-           div.pull-left
-              h3 {{choix.nom}}
-              p Date : {{choix.detail}}
-              
-      button(class="btn btn-primary" id="btnMeteo" type="button") Meteo
   
-    .row.tabxxx(id="tabClock" style="display:none;")
+    .row(id="tabClock" style="display:none;")
       div.container(class='hidden-xs')
         div#fancyClock
     
-    button(class="btn btn-primary" id="btnClock" type="button") Horloge
+      button(class="btn btn-info" id="btnMeteo" type="button") M&eacute;t&eacute;o
   
   div(class='zlog col-lg-4 col-md-4 hidden-xs hidden-sm bg-primary') 
   div(class='tracelog bg-warning', id='tmplt', style='display: none')

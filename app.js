@@ -35,8 +35,9 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/test', routes.test);
-app.get('/tdb', routes.lireBtnTdb);  //btn du tableau de bord
-app.get('/piece',routes.lirepiece);
+app.get('/tdb', routes.affichetdb);  //btn du tableau de bord
+app.get('/lesbouttons', routes.lireBtnTdb);  //lire les btn du tableau de bord
+app.get('/piece/:nom',routes.lirepiece);
 app.get('/led/:etat',routes.led); //affichage dune led etat = 0 ou 1
 
 app.get('/vnstat/:id',mshell.vnstat);
@@ -54,6 +55,7 @@ app.get('/devices',domoticz.index); // menu accueil + thermo
 app.get('/devices/listeinter',domoticz.listeinter); // menu accueil + thermo
 app.get('/devices/update',domoticz.updatedevices);
 app.get('/devices/file',domoticz.lirefiledevices); //en attente
+app.get('/devices/sendcde/:idx/:cde',domoticz.send_cde); //envoi d'une commande a domoticz
 
 var httpServeur = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

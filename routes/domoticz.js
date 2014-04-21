@@ -11,12 +11,28 @@ var toolfile = require ('../routes/toolfile'); // module perso lecture d'un fich
 exports.index = function(req, res){
   
       // res.render('menu');
-    requete_http('/json.htm?type=status-temp',function(chunk){
-      res.json(JSON.parse(chunk));
-    })
+   requete_http('/json.htm?type=status-temp',function(chunk){
+      res.json(JSON.parse(chunk));    
+    });
     
   };
  
+ 
+ /************************************************
+ * GEnvoi une commande ˆ Domotics
+ ***********************************************/
+exports.send_cde = function(req, res){
+      var idx = req.params.idx;
+      var cde = req.params.cde;
+      var laCde ='/json.htm?type=command&param=switchlight&idx='+idx+'&switchcmd='+cde+'&level=0';
+      console.log('===> envoi envoyee'+laCde);
+      
+      requete_http(laCde,function(chunk){
+	res.json(chunk);
+    });
+    
+  };
+  
  
  /************************************************
  *       Liste des scenes DOMOTICZ
@@ -40,8 +56,9 @@ exports.listeinter = function(req, res){
       
      var result = JSON.parse(chunk);
      
-     // console.log('===>  listeinter'+result);
-       res.json(result.result); 
+    // console.log('===>  listeinter'+result);
+     res.json(result.result);
+      //res.render('modules_all_tt', { modules:result.result, type_piece : 'all' });
     })
     
   };
@@ -73,7 +90,7 @@ function requete_http (url,callback){
 	});
 	
 	response.on('end',function(){
-	  console.log('==> end'+str);
+	//  console.log('==> end'+str);
 	  callback(str);
 	  
 	});

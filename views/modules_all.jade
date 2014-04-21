@@ -2,9 +2,10 @@ extends layout
 
 block content
   include barre_menu
+  span(ng-init="nomPiece = '#{nomPiece}'")
   
   .row(ng-controller="ctrlModule")
-    
+    br
     div(class='col-xs-12 col-sm-12 col-md-8 col-lg-8')
       table(class='table table-condensed')
         tr(ng-repeat='module in listeModules')
@@ -15,12 +16,13 @@ block content
               p
                 small(class='text-warning') {{module.Name}}          
           td
-            button(class='btn btn-success btn-lg btn_', typebtn='on', name='btn')
+            button(class='btn btn-success btn-lg btn_appareil', typebtn='on', idbtn='{{module.idx}}')
               span(class='glyphicon glyphicon-ok-circle')
           td
-            button(class='btn btn-danger btn-lg btn_', typebtn='off', name='btn')
+            button(class='btn btn-danger btn-lg btn_appareil', typebtn='off', name='{{module.idx}}')
               span(class='glyphicon glyphicon-remove-circle') 
       
+  
   
   div(class='zlog col-lg-4 col-md-4 hidden-xs hidden-sm bg-primary') Droite
     div(class='tracelog bg-warning', id='tmplt', style='display: none')

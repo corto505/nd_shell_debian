@@ -42,17 +42,13 @@ color :white;
 
 /**      LES BOUTONS  ****/
 
-#btnMeteo, #btnMenu{
+#btnMeteo, #btnClock{
 	position:absolute;
-	bottom: 0px;
-	right: 0px;
+	top: 7px;
+	right: 10px;
 }
 
-#btnClock{
-	position:absolute;
-	bottom: 0px;
-	left: 0px;
-}
+
 
 /* line 33, ../sass/mystyle.scss */
 .btn-menu-dg {
