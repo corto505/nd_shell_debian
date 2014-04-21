@@ -1,0 +1,28 @@
+extends layout
+
+block content  
+
+    include barre_menu  
+    .row(id="mainContent")
+      div.row
+        div(id="ladate")
+          div(id="bartop")
+            span(id="mois") ssss
+          div(id="jour") sss
+        
+    .row(id="tabMenu" ng-controller="ctrlBtn")
+      div(class="btn-menu-dg col-xs-12 col-sm-12 col-md-4" ng-repeat='choix in lesBouttons')
+        button(class='btn btn-success btn-lg btn_appareil', typebtn='on')
+              span(class='glyphicon glyphicon-ok-circle') 
+        a(href="{{choix.url}}")
+           div.pull-left
+              img(class="img-responsive pull-left" src="/images/{{choix.icone}}")
+            
+           div.pull-left
+              h3 {{choix.nom}}
+              p Date : {{choix.detail}}
+              
+      a(href="/" class="btn btn-info"  id="btnClock" type="button") Meteo
+      
+      button(class='btn btn-success btn-lg btn_appareil', typebtn='on')
+              span(class='glyphicon glyphicon-ok-circle') 
