@@ -45,11 +45,20 @@ exports.vnstat = function (req,res){
       case 'cron':
         myScript = 'crontab -l';
         break;
+      case 'gpio':
+        myScript = 'gpio readall';
+        break;
+      case 'dd':
+        myScript = 'df -h';
+        break;
       default:
        myScript = 'xx';
         break;
     }
     
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
     if (myScript !='xx'){
            execShell(myScript, function (err,content) {
        // console.log(content);

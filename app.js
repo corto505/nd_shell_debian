@@ -5,6 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes'); // fichier index
+var cors = require('cors');
 //var majax = require('./routes/ajax_rt');
 //var mscene = require('./routes/scenari_rt');
 var mshell = require('./routes/shell_rt');

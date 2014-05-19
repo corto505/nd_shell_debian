@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  include barre_menu
+  span(ng-init="nomPiece = '#{nomPiece}'")
+  br
+  .row(ng-controller="ctrlModule")
+    div(class="col-md-3" ,ng-repeat='module in listeModules')
+      div.thumbmail(class=" bg-primary",style="border : 1px solid;margin-bottom:10px")
+        p.text-right(style='padding-right:10px;') XXXX
+        center
+          img.img-circle(src="/images/lampe.jpg")
+          h4 {{module.Name}}
+          h2.text-center {{module.idx}}
+          p
+            button(class="btn btn-success btn-lg btn_appareil", typebtn="on", idbtn="{{module.idx}}")
+              span(class='glyphicon glyphicon-ok-circle')
+            span  
+            button(class='btn btn-danger btn-lg btn_appareil', typebtn='off', idbtn='{{module.idx}}')
+              span(class='glyphicon glyphicon-remove-circle')
+
+          br
+ 
+    div(class='zlog col-lg-3 col-md-3 hidden-xs hidden-sm bg-primary')
+      div(class='tracelog bg-warning', id='tmplt', style='display: none')
+        div#retourio
+          small xxxxx
+          
+    br
+    br
+    br    
+  include footer
+
+  
