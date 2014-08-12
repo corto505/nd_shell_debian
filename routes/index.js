@@ -66,7 +66,10 @@ exports.lirepiece = function(req,res){
  * Test : affiche la page index.
  */
 exports.test = function(req, res){
-  res.render('slider', { title: 'Les pièces' });
+
+	res.send('Module test');
+
+  //res.render('slider', { title: 'Les pièces' });
 };
 
 /**
@@ -77,14 +80,71 @@ exports.led = function (req,res){
 	var gpio = require ("pi-gpio");
 	var etat = parseInt(req.params.etat);
 	
-	gpio.open(11,"output", function(err){
-		gpio.write(11,etat,function(){
+	gpio.open(7,"output", function(err){
+		gpio.write(7,etat,function(){
 			console.log('commande envoyée :'+etat);
-			gpio.close(11);
+			gpio.close(7);
 		});
 	});
 	res.send('requete envoyée');
 };
+
+/**
+*  Gestion des relai via un mcp23017
+* PB declanche un relay direct avec le new le set et get je ne vois pas
+$ comment passer le N° du relay
+*/
+exports.relay = function (req,res){
+	var mcp23017 = require ("mcp23017");
+	var adresse = 0x20;
+	var mcp = new mcp23017(adresse,'/dev/i2c-1');
+
+	mcp.setGpioAPinValue(0,1);
+	mcp.setGpioAPinValue(0,0);
+
+	console.log(mcp.getGpioBPinValue(0));
+	res.send('requete envoyée');
+}
+
+/**
+*  Autre essai  avec i2C ?? result toujuos vide ?
+*/
+exports.relay2 = function (req,res){
+
+	var rasp2c = require("rasp2c");
+	//dectect device
+	rasp2c.detect(function (err,result){
+		if (err){
+			 console.log("err : detect 2c");
+		}else{
+			console.log('detect : ok');
+
+			console.log(result);
+		}
+	});
+
+	rasp2c.dump('0x20','0x11-0x15',function (err,result){
+		if (err){
+			 console.log("err : dump 2c");
+		}else{
+			console.log('dump : ok');
+
+			console.log(result);
+		}
+	});
+
+	rasp2c.set('0x20','0x14','OxFD',function (err,result){
+		if (err){
+			 console.log("err : set 2c");
+		}else{
+			console.log('set : ok');
+
+			console.log(result);
+		}
+	});
+	res.send('requete envoyée');
+}
+
 /**
 *  Test tableau json 
 */

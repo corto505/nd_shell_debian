@@ -37,11 +37,15 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/test', routes.test);
 app.get('/tdb', routes.affichetdb);  //btn du tableau de bord
+app.get('/relay',routes.relay); //affichage dune led etat = 0 ou 1
+app.get('/relay2',routes.relay2); //affichage dune led etat = 0 ou 1
 app.get('/lesbouttons', routes.lireBtnTdb);  //lire les btn du tableau de bord
 app.get('/piece/:nom',routes.lirepiece);
 app.get('/led/:etat',routes.led); //affichage dune led etat = 0 ou 1
 
 app.get('/vnstat/:id',mshell.vnstat);
+app.get('/vntest/:id',mshell.test);
+
 //app.get('/cron',mshell.readCrontab);
 
 //app.get('/ajax_appareil/*',majax.cmdx10_app);
@@ -54,7 +58,9 @@ app.get('/vnstat/:id',mshell.vnstat);
 app.get('/devices',domoticz.index); // menu accueil + thermo
 //app.get('/devices/listescene',domoticz.listescenes); 
 app.get('/devices/listeinter',domoticz.listeinter); // menu accueil + thermo
-app.get('/devices/update',domoticz.updatedevices);
+app.get('/devices/update',domoticz.updatedevices); // crer un fichier spécifique json
+app.get('/devices/dump',domoticz.dumpdevices); // creer un fichier json via Domoticz
+
 app.get('/devices/file',domoticz.lirefiledevices); //en attente
 app.get('/devices/sendcde/:idx/:cde',domoticz.send_cde); //envoi d'une commande a domoticz
 

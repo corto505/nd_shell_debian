@@ -25,7 +25,7 @@ exports.vnstat = function (req,res){
 
     switch (ordre) {
       case 'heure':
-        myScript = 'vnstat -h';
+        myScript = 'i2cdetect -y 1'; //vnstat -h';
         break;
       case 'jour':
         myScript = 'vnstat -d';
@@ -61,7 +61,7 @@ exports.vnstat = function (req,res){
 
     if (myScript !='xx'){
            execShell(myScript, function (err,content) {
-       // console.log(content);
+       console.log(content);
       // res.render('vnstat',{states: content,title:'vnstat '+ordre}); 
        res.send(content);
     });
@@ -72,19 +72,39 @@ exports.vnstat = function (req,res){
 
 };
 
+/**
+*  Activation des relais
+*
+*/
 
 exports.test = function (req,res){
-  var sys = require('sys');
-  var exec = require('child_process').exec;
-  var child;
+  var idRelay = req.params.id;
+  var rang = '0X14'; // rangee de relais
 
-  //exec ls
-  child = exec("vnstat -d", function (error, stdout, stderr){   // ps aux
-  sys.print('stdout: '+stdout);
-  sys.print('stderr: ' + stderr);
-  if (error !== null) {
-    console.log('exec error: '+ error); 
+  if(idRelay >=9){
+      rang = '0X15';
+      idRelay = idRelay - 8;
   }
-  res.render('index',{states: stdout}); 
+  if (idRelay > 1){
+       idRelay = 1 << (idRelay-1);
+  }
+
+  console.log('id => '+idRelay);
+  var code = 255 ^ idRelay; 
+
+  execShell("i2cset -y 1 0x20 "+rang+" 0x"+code.toString(16), function (err,content){
+        console.log(content);
+
   });
+
+   
+  setTimeout(function(){
+      execShell("i2cset -y 1 0x20 "+rang+" 0xFF", function (err,content){
+        console.log(content);
+      });
+  },2000);
+
+
+  
+
 };

@@ -64,6 +64,31 @@ exports.listeinter = function(req, res){
   };
   
   
+  /**************************
+* Affiche les boutons du tableau de bord
+* à partir d'un fichier /public/json => Traite par ANGULAR
+*  routes  = /tdb
+***************************/
+exports.dumpdevices = function(req,res){
+  var config = require('./config.js').settings;
+  var toolfile = require('./toolfile');
+  var fs = require ('fs');
+
+  var myFile = config.files.fileDevices;
+  
+ 
+  
+  requete_http('/json.htm?type=devices&filter=switchlight&used=true&order=Name',function(chunk){
+    //var data = JSON.parse(chunk);
+  //console.log(chunk)
+  console.log('-- Ecriture du fichier');
+  fs.writeFileSync(myFile,chunk,'utf8');
+
+  res.json(chunk);   
+  
+  });
+};
+
 /************************************************
  * execut une requte HTTP sur le sserveur Domoticz
  ***********************************************/
@@ -112,10 +137,10 @@ exports.lirefiledevices = function(req,res){
     var myFile = config.files.fileDevices; //'./public/json/pieces.json';
 
     toolfile.readContent(myFile, function (err,content) {
-	console.log('<-  Url '+url.parse(req.url).pathname);
+	  console.log('<-  Url '+url.parse(req.url).pathname);
 	    
-	lesModules = JSON.parse(content);
-	myobj = lesModules.result;
+	 lesModules = JSON.parse(content);
+	 myobj = lesModules.result;
 	//console.log("=>  ",myobj[0],'=========================');
 	    
 	//for (item in myobj){
@@ -126,7 +151,7 @@ exports.lirefiledevices = function(req,res){
    
     
       //res.send(lesModules.result);
-      res.render('devices_all', {
+  res.render('devices_all', {
 	 modules: myobj,
 	 type_piece : 'Liste modules domotics',
 	 lettreHouse : config.lettreHouse
